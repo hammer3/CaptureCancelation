@@ -4,12 +4,12 @@ import {SelectField} from '../SelectField';
 import { configure } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import {Icity} from '../../App';
+import { MenuItem } from 'material-ui';
 
 configure({ adapter: new Adapter() });
 
    // Following the material-ui test description
    describe('<SelectField  />', () => {
-  
   
     it('should work', () => {
       const cities: Icity[] = [
@@ -18,7 +18,15 @@ configure({ adapter: new Adapter() });
         {key: 30, value: 'Eckernförde'}
       ];
 
-      const wrapper = shallow(<SelectField itemList={cities} classes={{}} label='Stadt' changeHandler={{}}/>);
+      const value = '';
+
+      const wrapper = shallow(
+        <SelectField 
+          itemList={cities} 
+          classes={{}} 
+          label='Stadt' 
+          changeHandler={{}} 
+          value={value}/>);
       expect(wrapper.render);
     });
 
@@ -29,9 +37,17 @@ configure({ adapter: new Adapter() });
         {key: 30, value: 'Eckernförde'}
       ];
 
-      const wrapper = shallow(<SelectField itemList={cities} classes={{}} label='Stadt' changeHandler={{}}/>);
+      const value = '';
+
+      const wrapper = shallow(
+        <SelectField 
+        itemList={cities} 
+        classes={{}} 
+        label='Stadt' 
+        changeHandler={{}} 
+        value={value}/>);
+
       console.log(wrapper.debug());
-      //expect(wrapper.containsAllMatchingElements(MenuItem)).toBe(true);
       expect(wrapper.contains('Kiel'));
       expect(wrapper.contains('Eckernförde'));
       expect(wrapper.contains('Gettorf'));

@@ -24,35 +24,35 @@ const styles = (theme: Theme) => ({
 });
 
 type State = {
-  name?: string;
-};
+   value?: string;
+ };
 
 export interface ISelectFieldProps {
   changeHandler: any;
   classes: any;
   itemList: Icity[];
   label: string;
+  value: string;
 }
 
 
-export class SelectField extends React.Component<ISelectFieldProps,State> {
+export class SelectField extends React.Component<ISelectFieldProps, State> {
 
   constructor(props: ISelectFieldProps) {
     super(props as any);
     this.handleChange = this.handleChange.bind(this);
     console.log('constructor');
     this.state = {
-      name: 'no Selection',
+      value: 'no Selection',
     }
   };
-
-  
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // tslint:disable-next-line:max-line-length
     window.console.log('handleChange called: name:' + event.currentTarget.textContent + ' value:' + event.target.value);
-    window.console.log('setting state: ' + event.target.name +'.');
-    this.setState({ [event.target.name] : event.target.value });
+    // window.console.log('setting state: ' + event.target.name +'.');
+    //Before this.setState({ [event.target.name] : event.target.value });
+    this.props.changeHandler(event);
   }
 
     createMenueList(cities: Icity[]) {
@@ -70,22 +70,19 @@ export class SelectField extends React.Component<ISelectFieldProps,State> {
     }
 
   render() {
-    const {
-      classes,
-      itemList,
-      label,
-    } = this.props;
-
-    const cityMenueItems = this.createMenueList(itemList);
+    
+    const cityMenueItems = this.createMenueList(this.props.itemList);
+    const value = this.props.value;
 
     return (
-      <form className={classes.container} autoComplete="off">
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="city-simple">{label}</InputLabel>
+      <form className={this.props.classes.container} autoComplete="off">
+        <FormControl className={this.props.classes.formControl}>
+          <InputLabel htmlFor="city-simple">{this.props.label}</InputLabel>
           <Select
-            value= {this.state.name}
+            // Before: value= {this.state.name}
+            value = {value}
             onChange={this.handleChange.bind(this)}
-            input={<Input name="name" id="name" />}
+            input={<Input name="city" id="name" />}
           >
             <MenuItem value={0}><em>None</em></MenuItem>
             {cityMenueItems}
