@@ -3,8 +3,7 @@ import { shallow } from 'enzyme';
 import {SelectField} from '../SelectField';
 import { configure } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import {Icity} from '../../App';
-import { MenuItem } from 'material-ui';
+import {ISelectItems} from '../../App';
 
 configure({ adapter: new Adapter() });
 
@@ -12,7 +11,7 @@ configure({ adapter: new Adapter() });
    describe('<SelectField  />', () => {
   
     it('should work', () => {
-      const cities: Icity[] = [
+      const cities: ISelectItems[] = [
         {key: 10, value: 'Kiel'},
         {key: 20, value: 'Gettorf'},
         {key: 30, value: 'Eckernförde'}
@@ -25,13 +24,14 @@ configure({ adapter: new Adapter() });
           itemList={cities} 
           classes={{}} 
           label='Stadt' 
+          name='city'
           changeHandler={{}} 
           value={value}/>);
       expect(wrapper.render);
     });
 
     it('should contain menue items ', () => {
-      const cities: Icity[] = [
+      const cities: ISelectItems[] = [
         {key: 10, value: 'Kiel'},
         {key: 20, value: 'Gettorf'},
         {key: 30, value: 'Eckernförde'}
@@ -44,6 +44,7 @@ configure({ adapter: new Adapter() });
         itemList={cities} 
         classes={{}} 
         label='Stadt' 
+        name='city'
         changeHandler={{}} 
         value={value}/>);
 

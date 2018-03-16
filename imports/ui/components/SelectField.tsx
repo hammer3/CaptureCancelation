@@ -4,10 +4,8 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem, Theme } from 'material-ui';
 import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
-import { Icity } from '../App';
+import { ISelectItems } from '../App';
 import withStyles from 'material-ui/styles/withStyles';
-// import withStyles, { StyleRulesCallback, WithStyles } from 'material-ui/styles/withStyles';
-// import withRoot from '../withRoot';
 
 const styles = (theme: Theme) => ({
   container: {
@@ -23,69 +21,65 @@ const styles = (theme: Theme) => ({
   },
 });
 
-type State = {
-   value?: string;
+interface ISelectFieldState {
+   value?: string
  };
 
 export interface ISelectFieldProps {
   changeHandler: any;
   classes: any;
-  itemList: Icity[];
+  itemList: ISelectItems[];
   label: string;
+  name: string;
   value: string;
 }
 
 
-export class SelectField extends React.Component<ISelectFieldProps, State> {
+export class SelectField extends React.Component<ISelectFieldProps, ISelectFieldState> {
 
   constructor(props: ISelectFieldProps) {
     super(props as any);
     this.handleChange = this.handleChange.bind(this);
     console.log('constructor');
-    this.state = {
-      value: 'no Selection',
-    }
   };
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // tslint:disable-next-line:max-line-length
-    window.console.log('handleChange called: name:' + event.currentTarget.textContent + ' value:' + event.target.value);
-    // window.console.log('setting state: ' + event.target.name +'.');
-    //Before this.setState({ [event.target.name] : event.target.value });
+    window.console.log('handleChange called: name:' + event.currentTarget.textContent 
+      + ' value:' + event.target.value);
     this.props.changeHandler(event);
   }
 
-    createMenueList(cities: Icity[]) {
+  createMenueList(itemList: ISelectItems[]) {
       // FIXME type should be MenuItem instead of any
       // const cityMenueItems: React.ReactElement<ReactElement.MenuItem>[] = [];
-      const cityMenueItems: any = [];
-      for (let i = 0; i < cities.length; i++ ) {
-        const name: string = cities[i].value;
-        const key: number = cities[i].key;
+      const menuItems: any = [];
+      for (let i = 0; i < itemList.length; i++ ) {
+        const name: string = itemList[i].value;
+        const key: number = itemList[i].key;
         const item = <MenuItem key={key} value={key}>{name}</MenuItem>;
-        cityMenueItems.push(item);
+        menuItems.push(item);
         console.log('Add item to the Select Item list: key:'+key + '  name:' + name);
       }
-      return cityMenueItems;
-    }
+      return menuItems;
+  }
 
   render() {
     
-    const cityMenueItems = this.createMenueList(this.props.itemList);
+    const menueItems = this.createMenueList(this.props.itemList);
     const value = this.props.value;
 
     return (
       <form className={this.props.classes.container} autoComplete="off">
         <FormControl className={this.props.classes.formControl}>
-          <InputLabel htmlFor="city-simple">{this.props.label}</InputLabel>
+          <InputLabel htmlFor="simple Select List">{this.props.label}</InputLabel>
           <Select
             // Before: value= {this.state.name}
             value = {value}
             onChange={this.handleChange.bind(this)}
-            input={<Input name="city" id="name" />}
+            input={<Input name={this.props.name} id={this.props.name}/>}
           >
             <MenuItem value={0}><em>None</em></MenuItem>
-            {cityMenueItems}
+            {menueItems}
           </Select>
         </FormControl>
       </form>

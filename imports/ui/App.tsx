@@ -1,36 +1,34 @@
 import * as React from 'react';
 import SelectField from './components/SelectField';
 
-export interface Icity {
+export interface ISelectItems {
   value: string;
   key: number;
 }
 
-const cities: Icity[] = [
+const cities: ISelectItems[] = [
   {key: 10, value: 'Kiel'},
   {key: 20, value: 'Gettorf'},
   {key: 30, value: 'Eckernförde'}
 ];
 
-const schools: Icity[] = [
+const schools: ISelectItems[] = [
   {key: 100, value: 'IGF'},
   {key: 200, value: 'HFG'},
   {key: 300, value: 'EBG'}
 ];
 
-type State={
+interface IState{
   city?: string;
   school?: string;
 };
-type Props={
 
+interface IProps{
 }
 
-// App component - represents the whole app
-// <Selection changeHandler={this.onChange} itemList={cities}/>
-export class App extends React.Component<Props, State> {
+export class App extends React.Component<IProps, IState> {
 
-  constructor(props: Props){
+  constructor(props: IProps){
     super(props);
     this.onChange = this.onChange.bind(this);
     this.state = {
@@ -47,9 +45,6 @@ export class App extends React.Component<Props, State> {
 
 
  render() {
-   // const city = this.state.city;
-   // const school = this.state.school;
-
    return (
      <div className="container">
        <header>
@@ -61,15 +56,17 @@ export class App extends React.Component<Props, State> {
               itemList={cities} 
               changeHandler={this.onChange} 
               label='Stadt' 
+              name='city'
               classes={{}} 
               value={this.state.city as string}/>
         </div>
 
         <div>
-            <SelectField
+            <SelectField 
               itemList={schools} 
               changeHandler={this.onChange} 
               label='Schule'
+              name='school'
               classes={{}}
               value={this.state.school as string}/>
         </div>
