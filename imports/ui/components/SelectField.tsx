@@ -1,11 +1,12 @@
 
 import * as React from 'react';
-import Input, { InputLabel } from 'material-ui/Input';
-import { MenuItem, Theme } from 'material-ui';
-import { FormControl } from 'material-ui/Form';
-import Select from 'material-ui/Select';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel'
+import { MenuItem, Theme } from '@material-ui/core';
+import { FormControl } from '@material-ui/core';
+import Select from '@material-ui/core/Select';
 import { ISelectItems } from '../App';
-import withStyles from 'material-ui/styles/withStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = (theme: Theme) => ({
   container: {
