@@ -13,7 +13,7 @@ Meteor.startup(() => {
       {
         id: '1',
         name: 'Gudewerdt Schule',
-        schooltyp_id: 2,
+        schooltype_id: 2,
         street: 'Pferdemarkt',
         city: 'Eckernförde',
         country: 'Schleswig-Holstein',
@@ -21,7 +21,7 @@ Meteor.startup(() => {
       {
         id: '2',
         name: 'Peter Ustinov Schule',
-        schooltyp_id: 2,
+        schooltype_id: 2,
         street: 'Sauerstraße',
         city: 'Eckernförde',
         country: 'Schleswig-Holstein',
@@ -30,7 +30,7 @@ Meteor.startup(() => {
       {
         id: '3',
         name: 'Gemeinschaftsschule Friedrichsort',
-        schooltyp_id: 2,   
+        schooltype_id: 2,   
         street: 'Prieser Str.',
         city: 'Kiel Friedrichsort',
         country: 'Schleswig-Holstein',
@@ -38,7 +38,7 @@ Meteor.startup(() => {
       {
         id: '4',
         name: 'Gemeinschaftsschule Altenholz',
-        schooltyp_id: 2,   
+        schooltype_id: 2,   
         street: 'Altenholzer Str.',
         city: 'Kiel Altenholz',
         country: 'Schleswig-Holstein',
@@ -47,7 +47,7 @@ Meteor.startup(() => {
       {
         id: '5',
         name: 'Gymnasium',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Strasse',
         city: 'Kiel Altenholz',
         country: 'Schleswig-Holstein',     
@@ -56,7 +56,7 @@ Meteor.startup(() => {
       {
         id: '6',
         name: 'Klaus-Groth Schule',
-        schooltyp_id: 2, 
+        schooltype_id: 2, 
         street: 'Winterbeker Weg 45',
         city: 'Kiel',
         country: 'Schleswig-Holstein',     
@@ -64,7 +64,7 @@ Meteor.startup(() => {
       {
         id: '7',
         name: 'Max-Tau-Schule',
-        schooltyp_id: 2, 
+        schooltype_id: 2, 
         street: 'Odensestr. 6',
         city: 'Kiel Mettenhof',
         country: 'Schleswig-Holstein',     
@@ -72,7 +72,7 @@ Meteor.startup(() => {
       {
         id: '8',
         name: 'Herman-Löns-Schule',
-        schooltyp_id: 2, 
+        schooltype_id: 2, 
         street: 'Tiroler Ring 289',
         city: 'Kiel',
         country: 'Schleswig-Holstein',     
@@ -80,7 +80,7 @@ Meteor.startup(() => {
       {
         id: '9',
         name: 'Ernst-Balach-Gymnasium',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Charles-Roß-Ring 53',
         city: 'Kiel',
         country: 'Schleswig-Holstein',     
@@ -88,7 +88,7 @@ Meteor.startup(() => {
       {
         id: '10',
         name: 'Hebbelschule',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Feldstr. 177',
         city: 'Kiel Wik',
         country: 'Schleswig-Holstein',     
@@ -96,7 +96,7 @@ Meteor.startup(() => {
       {
         id: '11',
         name: 'Ricarda-Huch-Schule',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Hansastr. 69a',
         city: 'Kiel',
         country: 'Schleswig-Holstein',     
@@ -104,7 +104,7 @@ Meteor.startup(() => {
       {
         id: '12',
         name: 'Kieler Gelehrtenschule',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Feldstr. 19',
         city: 'Kiel',
         country: 'Schleswig-Holstein',     
@@ -112,7 +112,7 @@ Meteor.startup(() => {
       {
         id: '13',
         name: 'Humboldt-Schule',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Knooper Weg 63',
         city: 'Kiel',
         country: 'Schleswig-Holstein',     
@@ -120,7 +120,7 @@ Meteor.startup(() => {
       {
         id: '14',
         name: 'Käthe-Kollwitz-Schule',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Paul-Fleming-Str. 1',
         city: 'Kiel',
         country: 'Schleswig-Holstein',     
@@ -128,7 +128,7 @@ Meteor.startup(() => {
       {
         id: '15',
         name: 'Max-Planck-Schule',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Winterbeker Weg 1',
         city: 'Kiel',
         country: 'Schleswig-Holstein',     
@@ -136,11 +136,19 @@ Meteor.startup(() => {
       {
         id: '16',
         name: 'Gymnasium Elmschenhagen',
-        schooltyp_id: 1, 
+        schooltype_id: 1, 
         street: 'Algäuer Str. 4711',
         city: 'Kiel Elmschenhagen',
         country: 'Schleswig-Holstein',     
       },
+       { 
+        id:'17', 
+        name:'Jungmannschule', 
+        schooltype_id: 1, 
+        street: 'Sauerstr. 16', 
+        city:'Eckernförde', 
+        country:'Schleswig-Holstein',
+      }
     ];
 
   
@@ -149,7 +157,7 @@ Meteor.startup(() => {
         Schools.insert({
         _id: School.id,
         name: School.name,
-        schooltype_id: School.schooltyp_id,
+        schooltype_id: School.schooltype_id,
         street: School.street,
         city: School.city,
         country: School.country
@@ -181,6 +189,13 @@ Meteor.startup(() => {
         name: '6c',
         schoolId: '3'
       },
+
+      {
+        id: '4',
+        name: '8a',
+        schoolId: '9'
+      },
+
     ];
 
   

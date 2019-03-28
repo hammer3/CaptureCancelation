@@ -22,7 +22,7 @@ function getCities(): ISelectItems[]{
   return cities;
 }
 
-function getSchoolsInCity (cityName: string){
+function getSchoolsInCityForName (cityName: string){
   console.log('getSchoolsInCity for city:'+cityName+'.')
   const schoolsDB: ISelectItems[] = [];
   // let schoolsFromDB: Array<School> = Schools.find({ address_id: {$in: getAddresses(cityName)}}).fetch();
@@ -34,6 +34,20 @@ function getSchoolsInCity (cityName: string){
   });
   return schoolsDB;
 }
+
+function getSchoolsInCity (cityName: string, schoolType: string){
+  console.log('getSchoolsInCity for city:'+cityName+'.')
+  const schoolsDB: ISelectItems[] = [];
+  // let schoolsFromDB: Array<School> = Schools.find({ address_id: {$in: getAddresses(cityName)}}).fetch();
+  let schoolsFromDB: Array<School> = Schools.find({ city:cityName, schooltype_id:Number(schoolType)}).fetch();
+  console.log(schoolsFromDB);
+  schoolsFromDB.forEach((school) => {
+    console.log('ID:' + school._id +' Name:'+school.name);
+    schoolsDB.push({key: Number(school._id), value: school.name});
+  });
+  return schoolsDB;
+}
+
 
 function getClasses(schoolID: string){
   console.log('getClasses for school ID:'+schoolID+'.');
@@ -47,11 +61,22 @@ function getClasses(schoolID: string){
   return classesDB;
 }
 
+//NEW - START
+function getSchoolTypesInCity(): ISelectItems[]{
+  const schoolTypes: ISelectItems[] = [
+    {key: 1, value: 'Gymnasium'},
+    {key: 2, value: 'Gemeinschaftsschule'}
+  ];
+  return schoolTypes;
+}
+//NEW - END
+
 interface IState{
   city?: string;
   cityName?: string;
   school?: string;
   class?: string;
+  schoolType?: string; //NEW
 };
 
 interface IProps{
@@ -67,6 +92,7 @@ export class App extends React.Component<IProps, IState> {
       cityName: 'no city name',
       school: 'no school',
       class: 'no class',
+      schoolType: 'no type' //NEW'
     }
   }
 
@@ -79,6 +105,7 @@ export class App extends React.Component<IProps, IState> {
       window.console.log('setting state text: ' + event.currentTarget.textContent as string +'.');
     }
   }
+
 
  render() {
    return (
@@ -97,9 +124,22 @@ export class App extends React.Component<IProps, IState> {
               value={this.state.city as string}/>
         </div>
 
+
         <div>
             <SelectField 
-              itemList={getSchoolsInCity(this.state.cityName as string)} 
+              itemList={getSchoolTypesInCity()} 
+              changeHandler={this.onChange} 
+              label='Schulform' 
+              name='schoolType'
+              classes={{}} 
+              value={this.state.schoolType as string} />
+        </div>
+
+
+        <div>
+            <SelectField 
+              itemList={getSchoolsInCity(this.state.cityName as string,this.state.schoolType as string)} 
+              //itemList = {getSchoolsInCityForName(this.state.cityName as string)}
               changeHandler={this.onChange} 
               label='Schule'
               name='school'
